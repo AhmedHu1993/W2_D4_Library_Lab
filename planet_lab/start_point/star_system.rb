@@ -40,4 +40,37 @@ class StarSystem
     end
   end
 
+  def get_planets_with_no_moons
+    planets_with_no_moons = []
+    @planets.each {|planet| planets_with_no_moons << planet if planet.number_of_moons == 0}
+    return planets_with_no_moons
+  end
+
+  def get_planets_with_more_moons(number_of_moons)
+    planets = []
+    @planets.each {|planet| planets << planet.name if planet.number_of_moons > 4}
+    return planets
+  end
+
+  def get_number_of_planets_closer_than(distance)
+    near_planets = []
+    @planets.each {|planet| near_planets << planet.name if planet.distance_from_sun < 1000}
+    return near_planets.count
+  end
+
+  def get_total_number_of_moons
+    moons_of_every_planet = @planets.map { |planet| planet.number_of_moons }
+    moons_of_every_planet.reduce {|sum, number| sum + number}
+  end
+
+  def get_planet_names_sorted_by_increasing_distance_from_sun
+    sorted_planets = @planets.sort_by {|planet| planet.distance_from_sun}
+    sorted_planets.map { |planet| planet.name }
+  end
+
+  def get_planet_names_sorted_by_size_decreasing
+    sorted_planets = @planets.sort_by {|planet| -planet.diameter}
+    sorted_planets.map { |planet| planet.name }
+  end
+
 end
