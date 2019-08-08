@@ -15,9 +15,11 @@ class Library
   #return if @books.include?book
   def lend_book(customer, book)
     if @books.include?(book)
-    @books.delete(book)
-    customer.borrowed_books << book
-  else return "Sorry the book is not available at the moment"
+      @books.delete(book)
+      customer.borrow_book(book)
+    else
+      return "Sorry the book is not available at the moment"
     end
   end
+
 end
